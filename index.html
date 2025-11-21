@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personnel Action Form</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <p class="eyebrow">HR Operations</p>
+      <h1>Personnel Action Form</h1>
+      <p class="subhead">Capture hiring, promotion, transfer, leave, or termination actions in a single streamlined form.</p>
+    </div>
+    <div class="header-meta">
+      <div>
+        <p class="meta-label">Form ID</p>
+        <p class="meta-value" id="formId">PAF-<span class="muted">0000</span></p>
+      </div>
+      <div>
+        <p class="meta-label">Status</p>
+        <p class="meta-pill" id="statusBadge">Draft</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="card form-card">
+      <header class="card-header">
+        <div>
+          <p class="eyebrow">Employee</p>
+          <h2>Personnel details</h2>
+        </div>
+        <div class="actions">
+          <button type="button" class="ghost" id="loadDemo">Load demo</button>
+          <button type="button" class="ghost" id="resetForm">Reset</button>
+        </div>
+      </header>
+
+      <form id="personnelForm" novalidate>
+        <div class="field-grid">
+          <label class="field">
+            <span>Employee name</span>
+            <input type="text" name="employeeName" placeholder="Alex Doe" required />
+          </label>
+          <label class="field">
+            <span>Employee ID</span>
+            <input type="text" name="employeeId" placeholder="EMP-1234" />
+          </label>
+          <label class="field">
+            <span>Job title</span>
+            <input type="text" name="jobTitle" placeholder="Product Manager" />
+          </label>
+          <label class="field">
+            <span>Department</span>
+            <input type="text" name="department" placeholder="Operations" />
+          </label>
+          <label class="field">
+            <span>Manager</span>
+            <input type="text" name="manager" placeholder="Taylor Smith" />
+          </label>
+          <label class="field">
+            <span>Work location</span>
+            <input type="text" name="location" placeholder="Chicago" />
+          </label>
+        </div>
+
+        <fieldset class="fieldset">
+          <legend>Action details</legend>
+          <div class="field-grid three">
+            <label class="field">
+              <span>Action type</span>
+              <select name="actionType" id="actionType" required>
+                <option value="" disabled selected>Select</option>
+                <option>New hire</option>
+                <option>Transfer</option>
+                <option>Promotion</option>
+                <option>Salary change</option>
+                <option>Leave of absence</option>
+                <option>Return from leave</option>
+                <option>Termination</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Effective date</span>
+              <input type="date" name="effectiveDate" required />
+            </label>
+            <label class="field" id="endDateField">
+              <span>End date (if applicable)</span>
+              <input type="date" name="endDate" />
+            </label>
+
+            <label class="field" id="salaryField">
+              <span>New salary / hourly rate</span>
+              <input type="number" name="newSalary" step="0.01" placeholder="75000" />
+            </label>
+            <label class="field" id="fteField">
+              <span>FTE %</span>
+              <input type="number" name="fte" min="0" max="100" step="1" placeholder="100" />
+            </label>
+            <label class="field" id="reasonField">
+              <span>Reason</span>
+              <input type="text" name="reason" placeholder="Budgeted backfill, performance promotion, etc." />
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Details / instructions</span>
+            <textarea name="details" rows="3" placeholder="Summarize the change, tools access, and any onboarding or offboarding steps." ></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Access & equipment</legend>
+          <div class="pill-group" id="accessPills">
+            <label><input type="checkbox" name="access" value="Email" /> Email</label>
+            <label><input type="checkbox" name="access" value="HRIS" /> HRIS</label>
+            <label><input type="checkbox" name="access" value="Payroll" /> Payroll</label>
+            <label><input type="checkbox" name="access" value="VPN" /> VPN</label>
+            <label><input type="checkbox" name="access" value="Badge" /> Badge</label>
+            <label><input type="checkbox" name="access" value="Laptop" /> Laptop</label>
+            <label><input type="checkbox" name="access" value="Phone" /> Phone</label>
+            <label><input type="checkbox" name="access" value="Systems" /> Line-of-business system</label>
+          </div>
+          <label class="field">
+            <span>Equipment notes</span>
+            <textarea name="equipmentNotes" rows="2" placeholder="Model, specs, shipping address" ></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend>Approvals & routing</legend>
+          <div class="field-grid three">
+            <label class="field">
+              <span>HR partner</span>
+              <input type="text" name="hrPartner" placeholder="Jordan Lee" />
+            </label>
+            <label class="field">
+              <span>Finance reviewer</span>
+              <input type="text" name="financeReviewer" placeholder="Casey Nguyen" />
+            </label>
+            <label class="field">
+              <span>IT / Security</span>
+              <input type="text" name="itReviewer" placeholder="Security queue" />
+            </label>
+          </div>
+          <label class="field">
+            <span>Approval notes</span>
+            <textarea name="approvalNotes" rows="2" placeholder="Include budget references or ticket numbers" ></textarea>
+          </label>
+        </fieldset>
+
+        <div class="form-actions">
+          <div class="left">
+            <label class="switch">
+              <input type="checkbox" id="rushToggle" />
+              <span class="slider"></span>
+              <span class="switch-label">Mark as rush / high priority</span>
+            </label>
+          </div>
+          <div class="right">
+            <button type="button" class="ghost" id="saveDraft">Save draft</button>
+            <button type="submit" class="primary">Generate summary</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <aside class="card summary">
+      <header class="card-header">
+        <div>
+          <p class="eyebrow">Preview</p>
+          <h2>Action summary</h2>
+        </div>
+        <div class="status-group" id="priorityChip">Normal priority</div>
+      </header>
+      <div id="summaryContent" class="summary-body">
+        <p class="muted">Start entering details to see a formatted summary.</p>
+      </div>
+      <div class="summary-actions">
+        <button type="button" class="ghost" id="printSummary">Print</button>
+        <button type="button" class="ghost" id="downloadJson">Download JSON</button>
+      </div>
+    </aside>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <footer class="app-footer">
+    <p>Use this form for any personnel action that impacts payroll, access, or reporting. Keep records concise and actionable.</p>
+    <p class="muted">Built for HR coordinators, people ops, and hiring managers.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
